@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography, AppBar } from "@material-ui/core";
 import useStyles from "./style";
-import NotifiactionComponent from "./Components/notification.component";
+import NotificationComponent from "./Components/notification.component";
 import SidebarComponent from "./Components/sidebar.component";
 import VidePlayerComponent from "./Components/videPlayer.component";
 const App = () => {
@@ -15,7 +15,7 @@ const App = () => {
       <VidePlayerComponent />
       <SidebarComponent>
         {" "}
-        <NotifiactionComponent />
+        <NotificationComponent />
       </SidebarComponent>
     </div>
   );
