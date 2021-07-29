@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Peer from "simple-peer";
 import io from "socket.io-client";
+import MainComponent from "./Components/main.component";
 const SocketContext = createContext();
 
 const socket = io.connect("http://localhost:8000");
@@ -9,11 +10,11 @@ const socket = io.connect("http://localhost:8000");
 const ContextProvider = ({ children }) => {
   const [my_id, setMy_id] = useState("");
   const [stream, setStream] = useState();
-  const [receivingCall, setReceivingCall] = useState(false);
-  const [caller, setCaller] = useState("");
-  const [callerSignal, setCallerSignal] = useState();
+  const [receivingCall, setReceivingCall] = useState(false); //
+  const [caller, setCaller] = useState(""); //
+  const [callerSignal, setCallerSignal] = useState(); //
   const [callAccepted, setCallAccepted] = useState(false);
-  const [idToCall, setIdToCall] = useState("");
+  const [idToCall, setIdToCall] = useState(""); //
   const [callEnded, setCallEnded] = useState(false);
   const [name, setName] = useState("");
   const myVideo = useRef();
@@ -86,5 +87,30 @@ const ContextProvider = ({ children }) => {
     setCallEnded(true);
     connectionRef.current.destroy();
   };
-  return <></>;
+  return (
+    <>
+      <SocketContext.Provider
+        value={{
+          callAccepted,
+          myVideo,
+          userVideo,
+          stream,
+          name,
+          setName,
+          callEnded,
+          my_id,
+          callUser,
+          leaveCall,
+          answerCall,
+          receivingCall,
+          idToCall,
+          setIdToCall,
+        }}
+      >
+        <MainComponent />
+      </SocketContext.Provider>
+    </>
+  );
 };
+
+export { ContextProvider, SocketContext };
