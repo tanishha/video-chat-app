@@ -8,8 +8,6 @@ module.exports = (server) => {
         }
     })
     io.on("connection", (client) => {
-        console.log("What is socket", client);
-        console.log("Socket is active to be connected")
         client.emit("my_id", client.id);
 
         client.on("disconnect", () => {
@@ -19,8 +17,8 @@ module.exports = (server) => {
         client.on("callUser", (payload) => {
             io.to(payload.userToCall).emit("callUser", {
                 signal: payload.signalData,
-                from:payload.from,
-                name:payload.name
+                from: payload.from,
+                name: payload.name,
             });
         });
 

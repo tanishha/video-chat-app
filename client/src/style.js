@@ -3,20 +3,6 @@ import {
 } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-    appBar: {
-        borderRadius: 15,
-        margin: '30px 100px',
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '600px',
-        border: '2px solid black',
-
-        [theme.breakpoints.down('xs')]: {
-            width: '90%',
-        },
-    },
     image: {
         marginLeft: '15px',
     },
@@ -30,25 +16,19 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
     },
-    gridContainer: {
-        width: '100%',
-        [theme.breakpoints.down('xs')]: {
-            flexDirection: 'column',
-        },
-    },
+
     container: {
         width: '600px',
-        margin: '35px 0',
         padding: 0,
         [theme.breakpoints.down('xs')]: {
             width: '80%',
         },
     },
     margin: {
-        marginTop: 20,
+        marginTop: 4,
     },
     padding: {
-        padding: 20,
+        padding: 10,
     },
     video: {
         width: '550px',
@@ -57,13 +37,14 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     gridContainer: {
+        width: '100%',
         justifyContent: 'center',
         [theme.breakpoints.down('xs')]: {
             flexDirection: 'column',
         },
     },
     paper: {
-        padding: '10px 20px',
+        padding: '0px 20px',
         border: '2px solid black',
         margin: '10px',
     },

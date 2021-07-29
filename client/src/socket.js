@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import { CopyToClipboard } from "react-copy-to-clipboard";
+import React, { createContext, useEffect, useRef, useState } from "react";
 import Peer from "simple-peer";
 import io from "socket.io-client";
 import MainComponent from "./Components/main.component";
@@ -7,16 +6,17 @@ const SocketContext = createContext();
 
 const socket = io.connect("http://localhost:8000");
 
-const ContextProvider = ({ children }) => {
+const ContextProvider = () => {
   const [my_id, setMy_id] = useState("");
   const [stream, setStream] = useState();
-  const [receivingCall, setReceivingCall] = useState(false); //
-  const [caller, setCaller] = useState(""); //
-  const [callerSignal, setCallerSignal] = useState(); //
+  const [receivingCall, setReceivingCall] = useState(false);
+  const [caller, setCaller] = useState();
+  const [callerSignal, setCallerSignal] = useState();
   const [callAccepted, setCallAccepted] = useState(false);
-  const [idToCall, setIdToCall] = useState(""); //
+  const [idToCall, setIdToCall] = useState("");
   const [callEnded, setCallEnded] = useState(false);
   const [name, setName] = useState("");
+  const [username, setuserName] = useState("");
   const myVideo = useRef();
   const userVideo = useRef();
   const connectionRef = useRef();
@@ -35,7 +35,7 @@ const ContextProvider = ({ children }) => {
     socket.on("callUser", (payload) => {
       setReceivingCall(true);
       setCaller(payload.from);
-      setName(payload.name);
+      setuserName(payload.name);
       setCallerSignal(payload.signal);
     });
   }, []);
@@ -50,7 +50,7 @@ const ContextProvider = ({ children }) => {
       socket.emit("callUser", {
         userToCall: id,
         signalData: payload,
-        from: me,
+        from: my_id,
         name: name,
       });
     });
@@ -91,6 +91,7 @@ const ContextProvider = ({ children }) => {
     <>
       <SocketContext.Provider
         value={{
+          caller,
           callAccepted,
           myVideo,
           userVideo,
@@ -105,6 +106,7 @@ const ContextProvider = ({ children }) => {
           receivingCall,
           idToCall,
           setIdToCall,
+          username,
         }}
       >
         <MainComponent />
