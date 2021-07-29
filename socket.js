@@ -1,7 +1,5 @@
 module.exports = (server) => {
-    const io = require('socket.io')(server.listen(8000, () => {
-        console.log("Server is active...")
-    }), {
+    const io = require('socket.io')(server.listen(8000, () => {}), {
         cors: {
             origin: "*",
             methods: ["GET", "POST"]

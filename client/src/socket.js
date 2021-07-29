@@ -4,7 +4,7 @@ import io from "socket.io-client";
 import MainComponent from "./Components/main.component";
 const SocketContext = createContext();
 
-const socket = io.connect("http://localhost:8000");
+const socket = io.connect("https://florentine-veiled-dandelion.glitch.me");
 
 const ContextProvider = () => {
   const [my_id, setMy_id] = useState("");
